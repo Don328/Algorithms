@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberGenerator", "NumberGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{31DBC78D-2D6F-4E7A-A052-DC75647661E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmTests", "AlgorithmTests\AlgorithmTests.csproj", "{8ED70589-1E9A-4064-A292-8B283B7EBFB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{31DBC78D-2D6F-4E7A-A052-DC75647661E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31DBC78D-2D6F-4E7A-A052-DC75647661E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31DBC78D-2D6F-4E7A-A052-DC75647661E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ED70589-1E9A-4064-A292-8B283B7EBFB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ED70589-1E9A-4064-A292-8B283B7EBFB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ED70589-1E9A-4064-A292-8B283B7EBFB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ED70589-1E9A-4064-A292-8B283B7EBFB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

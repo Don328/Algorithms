@@ -1,9 +1,12 @@
-﻿public static class Program {
+﻿using NumberGenerator.Services;
+
+public static class Program 
+{
     public const string filePath = "../Shared/whitelist.txt";
     
     public static void Main(string[] args)
     {
-        ListGenerator.CreateNumbersListFile(args);
+        ListMaker.CreateNumbersListFile(args);
         WriteToConsole(ListReader.CreteListFromFile());
     }
 

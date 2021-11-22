@@ -1,10 +1,14 @@
-public static class ListReader
+
+
+namespace NumberGenerator.Services
 {
+    public static class ListReader
+    {
     public static List<int> CreteListFromFile()
     {
         var ints = new List<int>();
 
-        using (TextReader reader = File.OpenText(filePath))
+        using (TextReader reader = File.OpenText(Constants.filePath))
         {
             string text = reader.ReadLine();
             string[] strings = text.Split(' ');
@@ -22,11 +26,12 @@ public static class ListReader
         return ints;
     }
 
-    private static List<int> SortList(List<int> ints)
+    public static List<int> SortList(List<int> ints)
     {
         ints = (from i in ints
                 orderby i
                 select i).ToList();
         return ints;
+    }
     }
 }
