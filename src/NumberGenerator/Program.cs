@@ -1,58 +1,52 @@
 ﻿using System.Text;
 
 public static class Program {
+    const string filePath = "../Shared/whitelist.txt";
+    static int countDefault = 10;
+    static int upperBoundsDefault = 50;
+    static int count = 0;
+    static int upperBounds = 0;
+    static Random rand = new();
+    static List<int> nums = new();
+    
     public static void Main(string[] args)
     {
-        int countDefault = 10;
-        int upperBoundsDefault = 50;
-        int count = 0;
-        int upperBounds = 0;
+        CreateNumbersListFile(args);
+        WriteToConsole(CreteListFromFile());
+    }
 
-        var rand = new Random();
-        var nums = new List<int>();
-
-        if (args.Length > 1)
+    private static void WriteToConsole(List<int> ints)
+    {
+        foreach (var i in ints)
         {
-            int.TryParse(args[0], out count);
-            int.TryParse(args[1], out upperBounds);
-
-            if (count == 0)
-            {
-                count = countDefault;
-            }
-            
-            if (upperBounds == 0)
-            {
-                upperBounds = upperBoundsDefault;
-            }
-        }
-        else
-        {
-            count = countDefault;
-            upperBounds = upperBoundsDefault;
+            Console.WriteLine(i);
         }
 
-        while (nums.Count < count)
-        {
-            var num = rand.Next(upperBounds + 1);
-            if(!nums.Contains(num))
-            {
-                nums.Add(num);
-            }
-        }
-        var sb = new StringBuilder();
+        Console.WriteLine($"int count: {ints.Count}");
+        Console.WriteLine();
+    }
 
-        foreach (var num in nums)
-        {
-            sb.Append(num.ToString() + ' ');
+    private static List<int> SortList(List<int> ints)
+    {
+        ints = (from i in ints
+                orderby i
+                select i).ToList();
+        return ints;
+    }
 
-        }
+    private static void CreateNumbersListFile(string[] args)
+    {
+        ParseArgs(args);
+        CreateNumsList();
+        var numString = CreateNumString();
+        WriteListToFile(numString);
+    }
 
-        File.WriteAllText("../Shared/whitelist.txt", sb.ToString());
-
+    private static List<int> CreteListFromFile()
+    {
         var ints = new List<int>();
 
-        using (TextReader reader = File.OpenText("../Shared/whitelist.txt"))
+        using (TextReader reader = File.OpenText(filePath))
         {
             string text = reader.ReadLine();
             string[] strings = text.Split(' ');
@@ -66,17 +60,63 @@ public static class Program {
                 }
             }
         }
-        ints = (from i in ints
-            orderby i
-            select i).ToList();
+        ints = SortList(ints);
+        return ints;
+    }
 
-        foreach (var i in ints)
+    private static void WriteListToFile(string numString)
+    {
+        File.WriteAllText(filePath, numString);
+    }
+
+    private static string CreateNumString()
+    {
+        var sb = new StringBuilder();
+
+        foreach (var num in nums)
         {
-            Console.WriteLine(i);
+            sb.Append(num.ToString() + ' ');
+
         }
 
-        Console.WriteLine($"int count: {ints.Count}");
-        Console.WriteLine();
+        return sb.ToString();
+    }
+
+    private static void CreateNumsList()
+    {
+        while (nums.Count < count)
+        {
+            var num = rand.Next(upperBounds + 1);
+            if (!nums.Contains(num)
+                && num > 0)
+            {
+                nums.Add(num);
+            }
+        }
+    }
+
+    private static void ParseArgs(string[] args)
+    {
+        if (args.Length > 1)
+        {
+            int.TryParse(args[0], out count);
+            int.TryParse(args[1], out upperBounds);
+
+            if (count == 0)
+            {
+                count = countDefault;
+            }
+
+            if (upperBounds == 0)
+            {
+                upperBounds = upperBoundsDefault;
+            }
+        }
+        else
+        {
+            count = countDefault;
+            upperBounds = upperBoundsDefault;
+        }
     }
 }
 
