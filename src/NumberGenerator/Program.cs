@@ -32,8 +32,6 @@ public static class Program {
             upperBounds = upperBoundsDefault;
         }
 
-
-
         while (nums.Count < count)
         {
             var num = rand.Next(upperBounds + 1);
